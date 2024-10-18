@@ -10,11 +10,9 @@ from sqlalchemy import (
     BigInteger,
     DateTime,
     Float,
-    ARRAY,
 )
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-from sqlalchemy.dialects.postgresql import ARRAY
 from sentence_transformers import SentenceTransformer
 
 
@@ -40,12 +38,12 @@ class AgentConversation(Base):
     created_at = Column(DateTime, default=datetime.datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.datetime.utcnow)
     user_id = Column(Integer)
-    embedding = Column(ARRAY(Float))  # Store embedding as a numpy array
+    embedding = Column(String)  # Store embedding as a JSON string
 
 
 class AgentMemory:
     def __init__(self):
-        self.database_url = f"postgresql://{os.getenv('DB_USER')}:{os.getenv('DB_PASSWORD')}@{os.getenv('DB_HOST')}:{os.getenv('DB_PORT')}/{os.getenv('DB_NAME')}"
+        self.database_url = f"sqlite:///agent_memory.db"
         self.engine = create_engine(self.database_url, echo=False)
         Base.metadata.create_all(self.engine)
         self.Session = sessionmaker(bind=self.engine)
@@ -69,7 +67,7 @@ class AgentMemory:
         session = self.Session()
         try:
             memory_text = f"Run ID: {run_id}\nUser ID: {user_id}\nTool: {previous_subtask_tool}\nStatus: {previous_subtask_result}\nAttempt: {previous_subtask_attempt}\nStdout: {previous_subtask_output}\nStderr: {previous_subtask_errors}"
-            embedding = self.encoder.encode(memory_text).tolist()
+            embedding = str(self.encoder.encode(memory_text).tolist())  # Convert to string
 
             conversation = AgentConversation(
                 user_id=user_id,
