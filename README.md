@@ -56,8 +56,17 @@ These tools can be used individually or in combination to tackle a wide range of
 
 ## Usage
 
+Step 1: Create a .env file with the following environment variables:
+```bash
+OPENAI = <your openai api key>
+ANTHROPIC = <your anthropic api key>
+YOU_API_KEY = <your you.com api key> 
+GITHUB_ACCESS_TOKEN = <your github access token>
+```
+
 ### Running without Docker
 
+Step 2a: Run the agent:
 To run the agent without Docker, use the following command:
 
 ```bash
@@ -66,6 +75,7 @@ python3 run.py --prompt "<your prompt>" --provider "<openai or anthropic>"
 
 ### Running with Docker
 
+Step 2b: Run the agent with Docker:
 ```bash
 bash run.sh <image_name> \
                <prompt> \
