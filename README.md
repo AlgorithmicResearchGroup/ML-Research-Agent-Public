@@ -60,8 +60,8 @@ These tools can be used individually or in combination to tackle a wide range of
 
 1. Clone this repository:
    ```bash
-   git clone https://github.com/AlgorithmicResearchGroup/ML-Research-Agent.git
-   cd ML-Research-Agent
+   git clone https://github.com/AlgorithmicResearchGroup/ML-Research-Agent-Public.git
+   cd ML-Research-Agent-Public
    ```
 
 2. Install dependencies:
@@ -82,23 +82,23 @@ python3 run.py --prompt "<your prompt>" --provider "<openai or anthropic>"
 ### Running with Docker
 
 ```bash
-bash run.sh <image_name> <benchmark> <provider> <gpu_ids> <task_name> <time_limit> <huggingface_token> <env_file_path>
+bash run.sh <image_name> \
+               <prompt> \
+               <provider> \
+               <gpu_ids> \
+               <huggingface_token> \
+               <env_file_path>
 ```
 
 Example:
 ```bash
-bash run.sh algorithmicresearch/agent:latest full_benchmark \
-    openai \
-    0 \
-    math_reasoning \
-    24h \
-    <huggingface_token> \
-    /home/ubuntu/.env
+bash run.sh algorithmicresearch/agent-public:latest \
+   "train an mlp on the mnist dataset" \
+   openai \
+   0 \
+   <your huggingface token> \
+   /home/paperspace/Desktop/ML-Research-Agent-Public/.env
 ```
-
-## Available Tasks
-
-For a full list of available tasks and their corresponding Docker run commands, please refer to tasks repo here: [ML-Research-Agent-Tasks](https://github.com/AlgorithmicResearchGroup/ML-Research-Agent-Tasks)
 
 ## Contributing
 

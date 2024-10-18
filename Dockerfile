@@ -45,4 +45,4 @@ ENV PROMPT=$PROMPT
 ENV PROVIDER=$PROVIDER
 
 # Modify the CMD to include the Huggingface login
-CMD ["sh", "-c", "huggingface-cli login --token $HUGGINGFACE_TOKEN && python3 run.py --prompt ${PROMPT} --provider ${PROVIDER}"]
+ENTRYPOINT ["python3", "run.py"]

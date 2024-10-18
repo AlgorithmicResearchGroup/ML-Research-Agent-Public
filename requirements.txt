@@ -1,6 +1,7 @@
 aiohttp
 anthropic
 arxiv   
+bs4
 datasets
 evaluate
 huggingface-hub
