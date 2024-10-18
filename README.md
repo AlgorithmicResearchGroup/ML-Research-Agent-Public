@@ -11,21 +11,6 @@ This is our public baseline research and development agent. It is an agentic sys
 
 [![Example Video](./img/example1.png)](https://www.youtube.com/watch?v=Xhpe8MHk56w)
 
-## Available Tasks
-
-The baseline agent can perform the following tasks:
-
-- LLM Efficiency
-- Baby Language Model (LM)
-- Mini Pile
-- LLM Merging
-- Edge LLM Compression
-- Edge LLM Training
-- Math Reasoning (Autoformalization, Autoinformalization, Autotheorem Generation)
-
-Mini versions of several tasks are also available for quick testing and development.
-
-Please find the full list of tasks along with their prompts and descriptions here: [ML-Research-Agent-Tasks](https://github.com/AlgorithmicResearchGroup/ML-Research-Agent-Tasks)
 
 ## Available Tools
 
@@ -97,7 +82,7 @@ bash run.sh algorithmicresearch/agent-public:latest \
    openai \
    0 \
    <your huggingface token> \
-   /home/paperspace/Desktop/ML-Research-Agent-Public/.env
+   /path/to/.env
 ```
 
 ## Contributing
