@@ -73,28 +73,6 @@ To run the agent without Docker, use the following command:
 python3 run.py --prompt "<your prompt>" --provider "<openai or anthropic>"
 ```
 
-### Running with Docker
-
-Step 2b: Run the agent with Docker:
-```bash
-bash run.sh <image_name> \
-               <prompt> \
-               <provider> \
-               <gpu_ids> \
-               <huggingface_token> \
-               <env_file_path>
-```
-
-Example:
-```bash
-bash run.sh algorithmicresearch/agent-public:latest \
-   "train an mlp on the mnist dataset" \
-   openai \
-   0 \
-   <your huggingface token> \
-   /path/to/.env
-```
-
 ## Contributing
 
 Contributions to improve the baseline agent or add new tasks are welcome. Please submit a pull request or open an issue to discuss proposed changes.
