@@ -34,22 +34,34 @@ run_container() {
     echo "ENV_FILE_PATH: $ENV_FILE_PATH"
 
     local CONTAINER_NAME="agent_${PROVIDER}_$(date +%Y%m%d_%H%M%S)"
-    local HOST_OUTPUT_DIR="/home/ubuntu/agent_output/${CONTAINER_NAME}"
+    local HOST_OUTPUT_DIR="./agent_output/${CONTAINER_NAME}"
 
     # Ensure the host output directory exists
     mkdir -p "$HOST_OUTPUT_DIR"
 
-    docker run -it \
-        --name "$CONTAINER_NAME" \
-        --gpus "device=$GPU_IDS" \
-        -e NVIDIA_VISIBLE_DEVICES="$GPU_IDS" \
-        -e HUGGINGFACE_TOKEN="$HUGGINGFACE_TOKEN" \
-        -v "$HOST_OUTPUT_DIR:/app/output" \
-        --env-file "$ENV_FILE_PATH" \
-        -v "$ENV_FILE_PATH:/app/.env" \
-        "$IMAGE_NAME" \
-        --prompt "$PROMPT" \
-        --provider "$PROVIDER"
+    if [ "$GPU_IDS" = "cpu" ]; then
+        docker run -it \
+            --name "$CONTAINER_NAME" \
+            -e HUGGINGFACE_TOKEN="$HUGGINGFACE_TOKEN" \
+            -v "$HOST_OUTPUT_DIR:/app/output" \
+            --env-file "$ENV_FILE_PATH" \
+            -v "$ENV_FILE_PATH:/app/.env" \
+            "$IMAGE_NAME" \
+            --prompt "$PROMPT" \
+            --provider "$PROVIDER"
+    else
+        docker run -it \
+            --name "$CONTAINER_NAME" \
+            --gpus "device=$GPU_IDS" \
+            -e NVIDIA_VISIBLE_DEVICES="$GPU_IDS" \
+            -e HUGGINGFACE_TOKEN="$HUGGINGFACE_TOKEN" \
+            -v "$HOST_OUTPUT_DIR:/app/output" \
+            --env-file "$ENV_FILE_PATH" \
+            -v "$ENV_FILE_PATH:/app/.env" \
+            "$IMAGE_NAME" \
+            --prompt "$PROMPT" \
+            --provider "$PROVIDER"
+    fi
 
     CONTAINER_EXIT_CODE=$?
 

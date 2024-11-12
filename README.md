@@ -77,20 +77,38 @@ python3 run.py --prompt "<your prompt>" --provider "<openai or anthropic>"
 
 Step 2b: Run the agent with Docker:
 
+Build for CPU:
 ```
-docker build -t <image_name> .
+docker build --build-arg BASE_IMAGE=ubuntu:22.04 -t <image_name> .
+```
+
+Build for GPU:
+```
+docker build --build-arg BASE_IMAGE=nvidia/cuda:12.2.2-cudnn8-runtime-ubuntu22.04 -t <image_name> .
 ```
 
 ```bash
 bash run.sh <image_name> \
                <prompt> \
                <provider> \
-               <gpu_ids> \
+               <"cpu" or gpu_ids eg. 0> \
                <huggingface_token> \
                <env_file_path>
 ```
 
-Example:
+
+Example on CPU:
+```bash
+bash run.sh algorithmicresearch/agent-public:latest \
+   "train an mlp on the mnist dataset" \
+   openai \
+   "cpu" \
+   <your huggingface token> \
+   /path/to/.env
+```
+
+
+Example on GPU:
 ```bash
 bash run.sh algorithmicresearch/agent-public:latest \
    "train an mlp on the mnist dataset" \

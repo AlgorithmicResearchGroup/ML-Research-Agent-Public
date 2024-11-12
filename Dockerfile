@@ -1,5 +1,6 @@
-# Use CUDA 12.2.2 base image
-FROM nvidia/cuda:12.2.2-cudnn8-runtime-ubuntu22.04
+# Use CUDA 12.2.2 base image for GPU, or a generic Ubuntu image for CPU
+ARG BASE_IMAGE=nvidia/cuda:12.2.2-cudnn8-runtime-ubuntu22.04
+FROM ${BASE_IMAGE}
 
 # Accept build-time arguments
 ARG PROMPT
@@ -7,8 +8,7 @@ ARG PROVIDER
 
 ENV DEBIAN_FRONTEND=noninteractive \
     PROMPT=$PROMPT \
-    PROVIDER=$PROVIDER \
-    NVIDIA_VISIBLE_DEVICES=all
+    PROVIDER=$PROVIDER
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
