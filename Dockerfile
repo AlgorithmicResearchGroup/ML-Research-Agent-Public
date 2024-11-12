@@ -34,9 +34,6 @@ COPY . /app
 # Upgrade pip and install wheel
 RUN pip3 install --no-cache-dir --upgrade pip setuptools wheel
 
-# Install common dependencies from PyPI
-RUN pip3 install tqdm click tabulate evaluate datasets transformers bitsandbytes onnx onnxruntime-gpu urllib3 rouge_score protobuf accelerate rich optimum
-
 RUN pip3 install -r requirements.txt 
 RUN pip3 install -U "huggingface_hub[cli]"
 
