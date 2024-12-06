@@ -99,18 +99,18 @@ bash run.sh <image_name> \
 
 Example on CPU:
 ```bash
-bash run.sh algorithmicresearch/agent-public:latest \
+bash run.sh ghcr.io/algorithmicresearchgroup/ml-research-agent-public  \
    "train an mlp on the mnist dataset" \
    openai \
    "cpu" \
-   <your huggingface token> \
-   /path/to/.env
+   <huggingface_token> \
+   /root/ML-Research-Agent-Public/.env
 ```
 
 
 Example on GPU:
 ```bash
-bash run.sh algorithmicresearch/agent-public:latest \
+bash run.sh ghcr.io/algorithmicresearchgroup/ml-research-agent-public \
    "train an mlp on the mnist dataset" \
    openai \
    0 \
