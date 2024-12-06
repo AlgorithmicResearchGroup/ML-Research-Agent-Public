@@ -61,8 +61,12 @@ Example:
 python3 run.py --prompt "write an article on the history of python" --provider openai
 """
 
+default_prompt = """
+Train a multilayer perceptron on the MNIST dataset in PyTorch.
+"""
+
 @click.command()
-@click.option('--prompt', type=str, help='The prompt to run')
+@click.option('--prompt', type=str, help='The prompt to run', default=default_prompt)
 @click.option('--provider', type=click.Choice(['openai', 'anthropic']), default='openai', help='The provider to use')
 def main(prompt, provider):
     start = time.time()
